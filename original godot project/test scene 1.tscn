@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ubgbb35vfmma"]
 
 [ext_resource type="Texture2D" uid="uid://cf8528tiorwsl" path="res://Panorama_Sky_02-512x512.png" id="1_sv4pk"]
+[ext_resource type="PackedScene" uid="uid://hmldxbe04oah" path="res://3d scenes/test_character.tscn" id="2_gicmm"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_gicmm"]
 panorama = ExtResource("1_sv4pk")
@@ -131,3 +132,6 @@ mesh = SubResource("PrismMesh_nn3r1")
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=1687224683]
 transform = Transform3D(0.9477684, -0.30735892, 0.085238166, 0, 0.26723835, 0.96363044, -0.31895933, -0.9132985, 0.25328007, 1, -0.46, -0.39)
 mesh = SubResource("SphereMesh_tey05")
+
+[node name="test character" parent="." unique_id=265075399 instance=ExtResource("2_gicmm")]
+transform = Transform3D(-0.12208299, 0, -0.21816449, 0, 0.25, 0, 0.21816449, 0, -0.12208299, 0.401483, 0.24971941, 0.5980953)
