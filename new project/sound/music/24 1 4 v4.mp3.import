@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dih7hcebj578u"
+path="res://.godot/imported/24 1 4 v4.mp3-5fa169be4fbf33175641bb8f2c3a99fa.mp3str"
+
+[deps]
+
+source_file="res://sound/music/24 1 4 v4.mp3"
+dest_files=["res://.godot/imported/24 1 4 v4.mp3-5fa169be4fbf33175641bb8f2c3a99fa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

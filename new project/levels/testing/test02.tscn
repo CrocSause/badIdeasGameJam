@@ -4,6 +4,7 @@
 [ext_resource type="Material" uid="uid://bmjgmchfvwf3k" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k.tres" id="2_0iojf"]
 [ext_resource type="Script" uid="uid://c68dxahp0v5xg" path="res://addons/csg_toolkit/scripts/csg_repeater_3d.gd" id="3_q20v2"]
 [ext_resource type="PackedScene" uid="uid://s3fu5mxyqla6" path="res://debug utils/text_mesh_array.tscn" id="4_fqvii"]
+[ext_resource type="PackedScene" uid="uid://b0l0ar5p03me0" path="res://level utils/ramp_collider.tscn" id="5_c02y3"]
 [ext_resource type="PackedScene" uid="uid://b4hlld3ktldfk" path="res://test assets/house 1.glb" id="6_e0ndo"]
 [ext_resource type="Material" uid="uid://b282f6tleqruc" path="res://materials/ice/ice_frost_capt_eatbones_modified_2k.tres" id="7_i1f57"]
 [ext_resource type="PackedScene" uid="uid://bl2emus6ngcot" path="res://interactables/Button.tscn" id="7_tik32"]
@@ -33,12 +34,6 @@ depth = 0.25
 material = SubResource("StandardMaterial3D_0iojf")
 text = "5°"
 font_size = 8
-pixel_size = 0.1
-depth = 0.25
-
-[sub_resource type="TextMesh" id="TextMesh_0iojf"]
-material = SubResource("StandardMaterial3D_0iojf")
-text = "5°"
 pixel_size = 0.1
 depth = 0.25
 
@@ -192,12 +187,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 10)
 operation = 1
 size = Vector3(200, 50, 20)
 
-[node name="TextMeshArray" parent="CSGCombiner3D/slope test" unique_id=989527969 node_paths=PackedStringArray("geo_instance_for_settings") instance=ExtResource("4_fqvii")]
+[node name="TextMeshArray" parent="CSGCombiner3D/slope test" unique_id=989527969 instance=ExtResource("4_fqvii")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 1)
-geo_instance_for_settings = NodePath("../../stair height test/MeshInstance3D")
 text_mesh = SubResource("TextMesh_5wk48")
 strings = Array[String](["5°", "10°", "15°", "20°", "25°", "30°", "35°", "40°", "45°", "50°", "55°", "60°"])
 offset = Vector3(6, 0, 0)
+rotate_mesh = Vector3(0, 180, 0)
 
 [node name="stair height test" type="CSGCombiner3D" parent="CSGCombiner3D" unique_id=137049417]
 
@@ -286,22 +281,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1.5, -2)
 operation = 1
 size = Vector3(97, 12, 6)
 
-[node name="TextMeshArray" parent="CSGCombiner3D/stair height test" unique_id=1274874388 node_paths=PackedStringArray("geo_instance_for_settings") instance=ExtResource("4_fqvii")]
+[node name="TextMeshArray" parent="CSGCombiner3D/stair height test" unique_id=1274874388 instance=ExtResource("4_fqvii")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 4, -1)
-geo_instance_for_settings = NodePath("../MeshInstance3D")
 text_mesh = SubResource("TextMesh_ldcrw")
 strings = Array[String](["0.02", "0.04", "0.06", "0.08", "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30", "0.32", "0.34", "0.36", "0.38", "0.40", "0.42", "0.44", "0.46", "0.48", "0.50", "0.52", "0.54", "0.56", "0.58", "0.60"])
 offset = Vector3(-3, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CSGCombiner3D/stair height test" unique_id=978152545]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20, 4, 21)
-visible = false
-mesh = SubResource("TextMesh_0iojf")
-skeleton = NodePath("")
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1852605641]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -24.5)
-size = Vector3(2, 40, 31)
+rotate_mesh = Vector3(0, 180, 0)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D" unique_id=389717506]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
@@ -311,6 +296,314 @@ size = Vector3(2, 2, 1)
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 1.3161532, -0.18209028)
 operation = 2
 size = Vector3(4, 1, 4)
+
+[node name="stair height test ramps" type="CSGCombiner3D" parent="." unique_id=1875392009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+material_override = ExtResource("2_0iojf")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="stair height test ramps" unique_id=337663527]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps/CSGCombiner3D" unique_id=1847289869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="stair height test ramps/CSGCombiner3D" unique_id=1569883748]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.48, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.02, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="stair height test ramps" unique_id=835886072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -3)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps/CSGCombiner3D2" unique_id=1369105484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.46, 0)
+size = Vector3(2, 3, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="stair height test ramps/CSGCombiner3D2" unique_id=2159854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.46, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.04, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="stair height test ramps" unique_id=611373825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps/CSGCombiner3D3" unique_id=1538595678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="stair height test ramps/CSGCombiner3D3" unique_id=1898829337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.44, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.06, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="stair height test ramps" unique_id=1377525948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps/CSGCombiner3D4" unique_id=1438601372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="stair height test ramps/CSGCombiner3D4" unique_id=324840945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.08, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGCombiner3D5" type="CSGCombiner3D" parent="stair height test ramps" unique_id=769253848]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -6)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps/CSGCombiner3D5" unique_id=955846654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+size = Vector3(2, 1, 4)
+
+[node name="CSGRepeater3D" type="CSGCombiner3D" parent="stair height test ramps/CSGCombiner3D5" unique_id=221815179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+script = ExtResource("3_q20v2")
+template_node_path = NodePath("../CSGBox3D")
+repeat = Vector3(30, 1, 1)
+spacing = Vector3(3, 0.1, 0)
+pattern_type = 4
+metadata/_custom_type_script = "uid://c68dxahp0v5xg"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="stair height test ramps" unique_id=378652643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1.5, -2)
+operation = 1
+size = Vector3(97, 12, 6)
+
+[node name="TextMeshArray" parent="stair height test ramps" unique_id=1573834272 instance=ExtResource("4_fqvii")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 4, -1)
+text_mesh = SubResource("TextMesh_ldcrw")
+strings = Array[String](["0.02", "0.04", "0.06", "0.08", "0.10", "0.12", "0.14", "0.16", "0.18", "0.20", "0.22", "0.24", "0.26", "0.28", "0.30", "0.32", "0.34", "0.36", "0.38", "0.40", "0.42", "0.44", "0.46", "0.48", "0.50", "0.52", "0.54", "0.56", "0.58", "0.60"])
+offset = Vector3(-3, 0, 0)
+rotate_mesh = Vector3(0, 180, 0)
+
+[node name="ramps" type="Node3D" parent="stair height test ramps" unique_id=472013642]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1, 4, -1)
+
+[node name="Invisible Ramp" parent="stair height test ramps/ramps" unique_id=1124973334 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.1920929e-07, -4, -1)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.1
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp2" parent="stair height test ramps/ramps" unique_id=1186100157 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -3, -4, -1)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.2
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp3" parent="stair height test ramps/ramps" unique_id=764967205 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6, -4, -1.000001)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.3
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp4" parent="stair height test ramps/ramps" unique_id=446478913 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -9, -4, -1.000001)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.4
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp5" parent="stair height test ramps/ramps" unique_id=284684688 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -12, -4, -1.000001)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.5
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp6" parent="stair height test ramps/ramps" unique_id=839566826 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -14.999999, -4, -1.000001)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.6
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp7" parent="stair height test ramps/ramps" unique_id=864170429 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -18, -4, -1.0000019)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.7
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp8" parent="stair height test ramps/ramps" unique_id=1261645209 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -21, -4, -1.0000019)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.8
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp9" parent="stair height test ramps/ramps" unique_id=1924976252 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -24, -4, -1.0000019)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 0.9
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp10" parent="stair height test ramps/ramps" unique_id=77928046 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -27, -4, -1.0000029)
+collision_layer = 17
+collision_mask = 0
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp11" parent="stair height test ramps/ramps" unique_id=1918382179 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -30, -4, -1.0000029)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.1
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp12" parent="stair height test ramps/ramps" unique_id=164711357 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -33, -4, -1.0000029)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.2
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp13" parent="stair height test ramps/ramps" unique_id=483133046 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -36, -4, -1.0000029)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.3
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp14" parent="stair height test ramps/ramps" unique_id=963208518 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -39, -4, -1.0000038)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.4
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp15" parent="stair height test ramps/ramps" unique_id=61816109 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -42, -4, -1.0000038)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.5
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp16" parent="stair height test ramps/ramps" unique_id=597716452 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -45, -4, -1.0000038)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.6
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp17" parent="stair height test ramps/ramps" unique_id=754940070 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -48, -4, -1.0000038)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.7
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp18" parent="stair height test ramps/ramps" unique_id=1362408365 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -51, -4, -1.0000048)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.8
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp19" parent="stair height test ramps/ramps" unique_id=1501392676 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -54, -4, -1.0000048)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 1.9
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp20" parent="stair height test ramps/ramps" unique_id=1425406710 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -57, -4, -1.0000048)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.0
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp21" parent="stair height test ramps/ramps" unique_id=1678264056 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -60, -4, -1.0000057)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.1
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp22" parent="stair height test ramps/ramps" unique_id=1299362921 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -63, -4, -1.0000057)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.2
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp23" parent="stair height test ramps/ramps" unique_id=832237926 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -66, -4, -1.0000057)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.3
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp24" parent="stair height test ramps/ramps" unique_id=1592941245 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -69, -4, -1.0000057)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.4
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp25" parent="stair height test ramps/ramps" unique_id=1610669235 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -72, -4, -1.0000067)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.5
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp26" parent="stair height test ramps/ramps" unique_id=1649103445 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -75, -4, -1.0000067)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.6
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp27" parent="stair height test ramps/ramps" unique_id=16266623 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -78, -4, -1.0000067)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.7
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp28" parent="stair height test ramps/ramps" unique_id=127760494 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -81, -4, -1.0000076)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.8
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp29" parent="stair height test ramps/ramps" unique_id=862199541 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -84, -4, -1.0000086)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 2.9
+ramp_slide_back = 0.5
+
+[node name="Invisible Ramp30" parent="stair height test ramps/ramps" unique_id=1771318102 instance=ExtResource("5_c02y3")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -87, -4, -1.0000086)
+collision_layer = 17
+collision_mask = 0
+ramp_height = 3.0
+ramp_slide_back = 0.5
 
 [node name="spawnpoint" type="Marker3D" parent="." unique_id=1870199116 groups=["Spawnpoint"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 10)

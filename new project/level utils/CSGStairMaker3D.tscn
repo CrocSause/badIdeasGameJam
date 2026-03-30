@@ -1,21 +1,44 @@
-[gd_scene load_steps=2 format=3 uid="uid://bak8ltrhbmlv5"]
+[gd_scene format=3 uid="uid://bak8ltrhbmlv5"]
 
 [sub_resource type="GDScript" id="GDScript_0eugj"]
 script/source = "@tool
 extends CSGBox3D
 
-@export var num_stairs : int = 10
+# extended from somewhere online (i forget the source i've had it for ages)
 
-var _cur_num_stairs = -1
+@onready var stairs_poly: CSGPolygon3D = $StairsSubtractCSG
+@onready var bottom_poly: CSGPolygon3D = $BottomSubtractCSG
+
+@export_range(0, 999, 1) var num_stairs : int = 10:
+	set(value):
+		num_stairs = value
+		if stairs_poly == null or bottom_poly == null:
+			await self.ready
+		make_stairs()
+
+@export_range(0, 100, 0.01, \"hide_control\", \"or_greater\") var bottom_cut_up: float:
+	set(value):
+		bottom_cut_up = value
+		if stairs_poly == null or bottom_poly == null:
+			await self.ready
+		make_stairs()
+@export_range(0, 100, 0.01, \"hide_control\", \"or_greater\") var bottom_cut_over: float:
+	set(value):
+		bottom_cut_over = value
+		if stairs_poly == null or bottom_poly == null:
+			await self.ready
+		make_stairs()
+
+#var _cur_num_stairs = -1
 var _cur_size : Vector3
 
 func make_stairs():
 	#if not Engine.is_editor_hint():
 		#return
 	#
-	num_stairs = clampi(num_stairs, 0, 999)
-
-	var stairs_poly = $StairsSubtractCSG#add_fresh_stairs_csg_poly()
+	#num_stairs = clampi(num_stairs, 0, 999)
+	var cut_y = clamp(bottom_cut_up, 0, self.size.y)
+	var cut_x = self.size.x - clamp(bottom_cut_over, 0, self.size.x)
 	
 	var point_arr : PackedVector2Array = PackedVector2Array()
 	var step_height = self.size.y / num_stairs
@@ -36,30 +59,51 @@ func make_stairs():
 		# Closing the polygon by adding the last two points
 		point_arr.append(Vector2(self.size.x - step_width, self.size.y))
 		point_arr.append(Vector2(0, self.size.y))
-	
 	stairs_poly.polygon = point_arr
-		
+	
+	var point_arr2 : PackedVector2Array = PackedVector2Array()
+	point_arr2.append(Vector2(cut_x, -0.5))
+	point_arr2.append(Vector2(cut_x, 0))
+	point_arr2.append(Vector2(self.size.x, cut_y))
+	point_arr2.append(Vector2(self.size.x + 0.5, cut_y))
+	point_arr2.append(Vector2(self.size.x + 0.5, -0.5))
+	bottom_poly.polygon = point_arr2
+	
 	stairs_poly.depth = self.size.z * 2
+	bottom_poly.depth = self.size.z * 2
 	
 	stairs_poly.position.z = self.size.z / 2.0 + 0.5 * self.size.z
 	stairs_poly.position.y = -self.size.y / 2.0
 	stairs_poly.position.x = -self.size.x / 2.0
+	bottom_poly.position = stairs_poly.position
 
-	_cur_num_stairs = num_stairs
+	#_cur_num_stairs = num_stairs
 	_cur_size = self.size
+
+func _ready() -> void:
+	make_stairs()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if _cur_num_stairs != num_stairs or _cur_size != self.size:
-		make_stairs()
+	if _cur_size != self.size:
+		if stairs_poly != null and bottom_poly != null:
+			make_stairs()
 "
 
-[node name="CSGStairMaker3D" type="CSGBox3D"]
+[node name="CSGStairMaker3D" type="CSGBox3D" unique_id=59036987]
 script = SubResource("GDScript_0eugj")
-num_stairs = 4
+num_stairs = 5
+bottom_cut_up = 0.5
+bottom_cut_over = 0.5
 
-[node name="StairsSubtractCSG" type="CSGPolygon3D" parent="."]
+[node name="StairsSubtractCSG" type="CSGPolygon3D" parent="." unique_id=778079898]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 1)
 operation = 2
-polygon = PackedVector2Array(0, 0.25, 0.25, 0.25, 0.25, 0.5, 0.5, 0.5, 0.5, 0.75, 0.75, 0.75, 0.75, 1, 0, 1)
+polygon = PackedVector2Array(0, 0.2, 0.2, 0.2, 0.2, 0.4, 0.4, 0.4, 0.4, 0.6, 0.6, 0.6, 0.6, 0.8, 0.8, 0.8, 0.8, 1, 0, 1)
+depth = 2.0
+
+[node name="BottomSubtractCSG" type="CSGPolygon3D" parent="." unique_id=1617320039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, 1)
+operation = 2
+polygon = PackedVector2Array(0.5, -0.5, 0.5, 0, 1, 0.5, 1.5, 0.5, 1.5, -0.5)
 depth = 2.0

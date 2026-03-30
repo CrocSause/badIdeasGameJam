@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://e02dvpgw8qb8"]
+
+[ext_resource type="Script" uid="uid://dcphn4skspq18" path="res://sound/music_starter.gd" id="1_hjtgk"]
+
+[node name="MusicStarter" type="Area3D" unique_id=1577662135]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_hjtgk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

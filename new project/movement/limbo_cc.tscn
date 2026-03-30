@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://px0oaxvephqf" path="res://movement/limbo_cc_scripts/freefall.gd" id="11_5al2k"]
 [ext_resource type="Script" uid="uid://evmd00jll4hq" path="res://movement/limbo_cc_scripts/glide.gd" id="12_tguxa"]
 [ext_resource type="Script" uid="uid://felfw7ml6hyo" path="res://movement/limbo_cc_scripts/ledge_climb.gd" id="15_fvj4u"]
-[ext_resource type="PackedScene" uid="uid://c5lm540u5pgpn" path="res://interactables/key_holder.tscn" id="16_ywe5y"]
+[ext_resource type="PackedScene" uid="uid://c5lm540u5pgpn" path="res://interactables/intstate_manager.tscn" id="16_ywe5y"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8regx"]
 friction = 0.3
@@ -26,9 +26,9 @@ absorbent = true
 radius = 0.35
 height = 1.724231
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cg6sr"]
-radius = 0.32
-height = 0.8
+[sub_resource type="SphereShape3D" id="SphereShape3D_ywe5y"]
+margin = 0.02
+radius = 0.25
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_cg6sr"]
 radius = 0.35
@@ -39,6 +39,9 @@ size = Vector3(0.5, 0.5, 0.25)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ywe5y"]
 radius = 0.4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fdsrk"]
+radius = 0.3
 
 [sub_resource type="BlackboardPlan" id="BlackboardPlan_cg6sr"]
 var/wish_dir/name = &"wish_dir"
@@ -73,8 +76,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8878845, 0)
 shape = SubResource("CapsuleShape3D_g5xe8")
 
 [node name="shape_feet" type="CollisionShape3D" parent="." unique_id=402370835]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
-shape = SubResource("CapsuleShape3D_cg6sr")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("SphereShape3D_ywe5y")
 
 [node name="Camera" parent="." unique_id=1114308857 instance=ExtResource("1_sstgl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.58, 0)
@@ -99,6 +102,36 @@ exclude_parent = false
 target_position = Vector3(0, -1.3, 0)
 margin = 0.05
 max_results = 8
+
+[node name="stair_raycast_l" type="RayCast3D" parent="Faceforward" unique_id=200070729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 1, -0.5)
+visible = false
+enabled = false
+target_position = Vector3(0, -0.9, 0)
+
+[node name="stair_raycast_c" type="RayCast3D" parent="Faceforward" unique_id=767194176]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+visible = false
+enabled = false
+target_position = Vector3(0, -0.9, 0)
+
+[node name="stair_raycast_r" type="RayCast3D" parent="Faceforward" unique_id=1916886723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1, -0.5)
+visible = false
+enabled = false
+target_position = Vector3(0, -0.9, 0)
+
+[node name="ramp_raycast" type="RayCast3D" parent="." unique_id=2108623392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.15, 0)
+collision_mask = 16
+
+[node name="on_ground_shapecast" type="ShapeCast3D" parent="." unique_id=1663076941]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("SphereShape3D_fdsrk")
+target_position = Vector3(0, -0.025, 0)
+max_results = 8
+collision_mask = 17
 
 [node name="Movement" type="LimboHSM" parent="." unique_id=798909399]
 update_mode = 2
@@ -139,7 +172,7 @@ script = ExtResource("12_tguxa")
 [node name="LedgeClimb" type="LimboState" parent="Movement" unique_id=671497931]
 script = ExtResource("15_fvj4u")
 
-[node name="KeyHolder" parent="." unique_id=427082125 instance=ExtResource("16_ywe5y")]
+[node name="IntStateManager" parent="." unique_id=427082125 instance=ExtResource("16_ywe5y")]
 
 [connection signal="body_shape_entered" from="." to="Movement" method="_on_body_shape_entered"]
 [connection signal="body_shape_exited" from="." to="Movement" method="_on_body_shape_exited"]

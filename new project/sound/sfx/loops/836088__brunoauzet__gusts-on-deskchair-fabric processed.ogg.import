@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bhekr5w5oc1h3"
+path="res://.godot/imported/836088__brunoauzet__gusts-on-deskchair-fabric processed.ogg-f7943e635b05000baaac30c01af1dddf.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/sfx/loops/836088__brunoauzet__gusts-on-deskchair-fabric processed.ogg"
+dest_files=["res://.godot/imported/836088__brunoauzet__gusts-on-deskchair-fabric processed.ogg-f7943e635b05000baaac30c01af1dddf.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

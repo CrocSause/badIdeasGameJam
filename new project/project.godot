@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="uid://brn5rk8bkugkt"
+
 [autoload]
 
 GsomConsole="*res://addons/gsom_console/./gsom_console_autoload.gd"
@@ -46,6 +50,7 @@ enabled=PackedStringArray("res://addons/PolyHavenImport/plugin.cfg", "res://addo
 
 Spawnpoint="exact foot position to spawn player at"
 clickable="contains a click() method"
+musicplayer="used for fading out prior music before starting new music"
 
 [input]
 
@@ -107,6 +112,7 @@ climb={
 3d_physics/layer_2="player"
 3d_physics/layer_3="clickable"
 3d_physics/layer_4="climbable"
+3d_physics/layer_5="stair ramp - speeds up movement on stairs with ramp colliders"
 3d_physics/layer_7="multiclick - clicks all buttons inside it"
 
 [physics]

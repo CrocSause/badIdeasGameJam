@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cowordmdx8wm3"
+path="res://.godot/imported/301 motors fans whines rumbles 30s-23.ogg-0b19f5ec43517b28e5e2d59420b7562c.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/sfx/loops/301 motors fans whines rumbles 30s-23.ogg"
+dest_files=["res://.godot/imported/301 motors fans whines rumbles 30s-23.ogg-0b19f5ec43517b28e5e2d59420b7562c.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

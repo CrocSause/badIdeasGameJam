@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c5bwme5ac7vlv"]
+
+[ext_resource type="Script" uid="uid://bkvgl7vyaoko7" path="res://level utils/cable.gd" id="1_2eolv"]
+
+[sub_resource type="Curve3D" id="Curve3D_2eolv"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -0.44131073, 0.2857143, 0, 0, 0, 0, 0, 0, 0, -0.7792085, 0.5714286, 0, 0, 0, 0, 0, 0, 0, -1.0292685, 0.85714287, 0, 0, 0, 0, 0, 0, 0, -1.203017, 1.1428572, 0, 0, 0, 0, 0, 0, 0, -1.3084629, 1.4285715, 0, 0, 0, 0, 0, 0, 0, -1.3504666, 1.7142857, 0, 0, 0, 0, 0, 0, 0, -1.3309642, 2, 0, 0, 0, 0, 0, 0, 0, -1.2490569, 2.2857144, 0, 0, 0, 0, 0, 0, 0, -1.1009692, 2.5714285, 0, 0, 0, 0, 0, 0, 0, -0.879875, 2.857143, 0, 0, 0, 0, 0, 0, 0, -0.57558316, 3.142857, 0, 0, 0, 0, 0, 0, 0, -0.17406753, 3.4285715, 0, 0, 0, 0, 0, 0, 0, 0.34317946, 3.7142856, 0, 0, 0, 0, 0, 0, 0, 1, 4),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 15
+
+[node name="Cable" type="Node3D" unique_id=142051766]
+script = ExtResource("1_2eolv")
+other_position = Vector3(0, 1, 4)
+point_count = 15
+sag_factor = 3.0
+cable_profile = 3.0
+cable_thickness = 0.01
+cable_rotate = 0.5
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="." unique_id=1558448938]
+top_level = true
+polygon = PackedVector2Array(0.0049999994, 0.008660254, -0.01, -8.7422775e-10, 0.004999999, -0.008660254)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 1
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+smooth_faces = true
+
+[node name="Path3D" type="Path3D" parent="." unique_id=1584481170]
+curve = SubResource("Curve3D_2eolv")

@@ -1,0 +1,53 @@
+[gd_scene format=4 uid="uid://b0l0ar5p03me0"]
+
+[ext_resource type="Script" uid="uid://ko8p616scbtd" path="res://level utils/ramp_collider.gd" id="1_51ggo"]
+[ext_resource type="Texture2D" uid="uid://c1cpmiwn1xgyq" path="res://materials/Mesh.png" id="2_git2o"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tik32"]
+resource_local_to_scene = true
+points = PackedVector3Array(-1, 0, 0, 1, 0, 0, 1, 0, -5, -1, 0, -5, -1, 1, -5, 1, 1, -5, -1, 0, -5, 1, 0, -5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51ggo"]
+transparency = 2
+alpha_scissor_threshold = 0.7
+alpha_antialiasing_mode = 0
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.99999994, 0.29229337, 0.020897603, 1)
+albedo_texture = ExtResource("2_git2o")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hvghu"]
+resource_local_to_scene = true
+_surfaces = [{
+"aabb": AABB(-1, 0, -5, 2, 1, 5),
+"attribute_data": PackedByteArray("AACAvwAAAAAAAIA/AAAAAAAAgL8AAKDAAACAPwAAoMAAAIC/AACgwAAAgD8AAKDAAACAvwAAgMAAAIA/AACAwAAAgL8AAIDAAACAPwAAgMAAAIC/AACAwAAAgD8AAIDA"),
+"format": 34359742481,
+"index_count": 14,
+"index_data": PackedByteArray("AQAAAAMAAgAFAAQABwAGAAkACAALAAoAAQAAAA=="),
+"primitive": 4,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AACAvwAAAAAAAAAAAACAPwAAAAAAAAAAAACAvwAAgD8AAKDAAACAPwAAgD8AAKDAAACAvwAAgD8AAKDAAACAPwAAgD8AAKDAAACAvwAAAAAAAKDAAACAPwAAAAAAAKDAAACAvwAAAAAAAKDAAACAPwAAAAAAAKDAAACAvwAAAAAAAKDAAACAPwAAAAAAAKDA")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_51ggo"]
+resource_local_to_scene = true
+size = Vector3(2, 1, 0)
+
+[node name="RampCollider" type="StaticBody3D" unique_id=1124973334]
+collision_layer = 17
+collision_mask = 0
+script = ExtResource("1_51ggo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1788313741]
+shape = SubResource("ConvexPolygonShape3D_tik32")
+debug_color = Color(0.99559516, 0.05499383, 3.85046e-07, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=2125014352]
+material_override = SubResource("StandardMaterial3D_51ggo")
+mesh = SubResource("ArrayMesh_hvghu")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1050785817]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -5)
+shape = SubResource("BoxShape3D_51ggo")
+debug_color = Color(0.99607843, 0.05490196, 0, 1)

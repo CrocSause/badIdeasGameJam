@@ -10,7 +10,7 @@ extends Node3D
 @onready var camera_third_person: Camera3D = $Rotate/Flip/SpringArm3D/CameraThirdPerson
 @onready var camera_first_person: Camera3D = $Rotate/Flip/FirstPerson/CameraFirstPerson
 @onready var hold_position: Node3D = $Rotate/Flip/FirstPerson/HoldPosition
-@onready var aim_debug_pointer: Node3D = $AimDebugPointer
+@onready var nodePointer_mesh: MeshInstance3D = $AimDebugPointer/AimDebugPointer_internal
 
 
 var next_distance: float = 10
@@ -48,7 +48,7 @@ var active_camera: Node
 var is_active: bool = true:
 	set(value):
 		is_active = value
-		aim_debug_pointer.visible = value
+		nodePointer.visible = value
 		nodeRaycast.enabled = value
 		camera_third_person.current = value
 		camera_first_person.current = value
@@ -201,13 +201,14 @@ func _process(delta):
 				colliding_with = nodeRaycast.get_collider()
 				nodePointer.visible = true
 				aim_pos = nodeRaycast.get_collision_point()
-				nodePointer.global_transform.origin = aim_pos
+				nodePointer.global_transform.origin = lerp(aim_pos, active_camera.global_position, 0.9)
 				aim_dist = nodeRaycast.global_transform.origin.distance_to(aim_pos)
 				aim_norm = nodeRaycast.get_collision_normal()
 				if aim_norm.is_equal_approx(Vector3(0, 1, 0)) or aim_norm.is_equal_approx(Vector3(0, -1, 0)):
 					nodePointer.global_transform.basis = Basis.looking_at(aim_norm, Vector3(1, 0, 0))
 				else:
 					nodePointer.global_transform.basis = Basis.looking_at(aim_norm)
+				#nodePointer_mesh.scale = Vector3(0.05, 0.05, 0.05) * aim_dist * aim_dist
 			else:
 				colliding = false
 				colliding_with = null

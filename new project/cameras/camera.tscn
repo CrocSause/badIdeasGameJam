@@ -1,21 +1,95 @@
 [gd_scene format=3 uid="uid://hl8invlcxyuh"]
 
 [ext_resource type="Script" uid="uid://cr82ybl4rl6yg" path="res://cameras/camera.gd" id="1_tf3c0"]
+[ext_resource type="ArrayMesh" uid="uid://dcxoec2qms3xs" path="res://models/3d crosshair.res" id="2_r6v6c"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ifya2"]
-shading_mode = 0
-disable_ambient_light = true
-albedo_color = Color(1, 0, 1, 1)
-disable_receive_shadows = true
+[sub_resource type="Shader" id="Shader_r6v6c"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.6.1.stable's StandardMaterial3D.
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_kjskr"]
-material = SubResource("StandardMaterial3D_ifya2")
-top_radius = 0.0
-bottom_radius = 0.1
-height = 1.0
-radial_segments = 4
-rings = 1
-cap_top = false
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform sampler2D texture_emission : source_color, hint_default_black, filter_linear_mipmap, repeat_enable;
+uniform vec4 emission : source_color;
+uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+
+	// Fixed Size: Enabled
+	if (PROJECTION_MATRIX[3][3] != 0.0) {
+		// Orthogonal matrix; try to do about the same with viewport size.
+		float h = abs(1.0 / (2.0 * PROJECTION_MATRIX[1][1]));
+		// Consistent with vertical FOV (Keep Height).
+		float sc = (h * 2.0);
+		MODELVIEW_MATRIX[0] *= sc;
+		MODELVIEW_MATRIX[1] *= sc;
+		MODELVIEW_MATRIX[2] *= sc;
+	} else {
+		// Scale by depth.
+		float sc = -(MODELVIEW_MATRIX)[3].z;
+		MODELVIEW_MATRIX[0] *= sc;
+		MODELVIEW_MATRIX[1] *= sc;
+		MODELVIEW_MATRIX[2] *= sc;
+	}
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+
+	// Emission: Enabled
+	vec3 emission_tex = texture(texture_emission, base_uv).rgb;
+	// Emission Operator: Add
+	EMISSION = (emission.rgb + emission_tex) * emission_energy;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7sdtt"]
+resource_name = "Material"
+render_priority = 0
+shader = SubResource("Shader_r6v6c")
+shader_parameter/albedo = Color(0.47131312, 0.59447134, 0.49048305, 1)
+shader_parameter/albedo_texture_size = Vector2i(0, 0)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0.20308873, 0.25707135, 0.28121883, 1)
+shader_parameter/emission_energy = 1.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="Camera" type="Node3D" unique_id=804836102]
 script = ExtResource("1_tf3c0")
@@ -50,6 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="AimDebugPointer_internal" type="MeshInstance3D" parent="AimDebugPointer" unique_id=389121235]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.5)
+transform = Transform3D(-0.2, -1.7484556e-08, 7.642742e-16, 0, -8.742278e-09, -0.2, 1.7484556e-08, -0.2, 8.742278e-09, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_7sdtt")
 cast_shadow = 0
-mesh = SubResource("CylinderMesh_kjskr")
+mesh = ExtResource("2_r6v6c")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bg21cqg3ur275"
+path="res://.godot/imported/829005__brunoauzet__gusts-on-plastic-net-1 mixed and looped.ogg-1c8681220f302ddff3e51f1970a74fab.oggvorbisstr"
+
+[deps]
+
+source_file="res://sound/sfx/loops/829005__brunoauzet__gusts-on-plastic-net-1 mixed and looped.ogg"
+dest_files=["res://.godot/imported/829005__brunoauzet__gusts-on-plastic-net-1 mixed and looped.ogg-1c8681220f302ddff3e51f1970a74fab.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

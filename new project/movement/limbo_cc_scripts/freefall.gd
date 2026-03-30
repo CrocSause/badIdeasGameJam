@@ -20,4 +20,5 @@ func _update(delta: float) -> void:
 		## if stuck in place, jostle the character to reset collisions, hopefully
 		#agent.apply_central_impulse(100 * Vector3.UP)
 	#agent.move_and_slide()
-	get_root().desired_air_velocity = get_root().wish_dir
+	#get_root().desired_air_velocity = get_root().wish_dir
+	get_root().desired_air_velocity = lerp(get_root().desired_air_velocity, Vector3.ZERO, 0.1 * delta)

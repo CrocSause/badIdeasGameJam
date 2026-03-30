@@ -1,0 +1,159 @@
+[gd_scene format=3 uid="uid://dh5oolfcd71n5"]
+
+[ext_resource type="AudioStream" uid="uid://cnowfrmll67rt" path="res://sound/sfx/loops/highway noise 1.ogg" id="1_b8gel"]
+[ext_resource type="Script" uid="uid://mex5wiwqkmbf" path="res://sound/external_world_sound_player.gd" id="1_n7ghp"]
+[ext_resource type="AudioStream" uid="uid://b4t5bjt224lgs" path="res://sound/sfx/loops/wind.ogg" id="2_oij2n"]
+[ext_resource type="AudioStream" uid="uid://b633w11rmlxmu" path="res://sound/sfx/loops/rumble 4x.ogg" id="3_o0o1k"]
+[ext_resource type="AudioStream" uid="uid://bg21cqg3ur275" path="res://sound/sfx/loops/829005__brunoauzet__gusts-on-plastic-net-1 mixed and looped.ogg" id="4_b8up1"]
+[ext_resource type="AudioStream" uid="uid://bhekr5w5oc1h3" path="res://sound/sfx/loops/836088__brunoauzet__gusts-on-deskchair-fabric processed.ogg" id="5_ypwfq"]
+[ext_resource type="AudioStream" uid="uid://cowordmdx8wm3" path="res://sound/sfx/loops/301 motors fans whines rumbles 30s-23.ogg" id="6_pgems"]
+
+[sub_resource type="Animation" id="Animation_oij2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:pitch_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_o0o1k"]
+resource_name = "wind volume"
+length = 40.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2666667, 6.3, 7.5666666, 11.566667, 15, 16.166666, 19.433332, 22, 24.7, 27.5, 28.6, 32.5, 33.5, 36.666668, 39.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-15.0, -10.0, -15.0, -12.0, -18.0, -12.0, -17.0, -15.0, -10.0, -16.0, -13.0, -16.0, -14.0, -9.0, -17.0, -15.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:pitch_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2666667, 6.3, 7.5666666, 11.566667, 15, 16.166666, 19.433332, 22, 24.7, 27.5, 28.6, 32.5, 33.5, 36.666668, 39.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.9, 1.1, 0.8, 1.0, 0.75, 0.9, 0.7, 0.9, 1.05, 0.85, 0.9, 0.8, 0.92, 1.08, 0.87, 0.9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b8up1"]
+_data = {
+&"RESET": SubResource("Animation_oij2n"),
+&"wind volume": SubResource("Animation_o0o1k")
+}
+
+[node name="ExternalWorldSoundPlayer" type="Node3D" unique_id=1240025028]
+script = ExtResource("1_n7ghp")
+
+[node name="road noise" type="AudioStreamPlayer3D" parent="." unique_id=1216907093]
+stream = ExtResource("1_b8gel")
+attenuation_model = 1
+volume_db = -24.0
+unit_size = 100.0
+max_db = 6.0
+pitch_scale = 0.9161955
+autoplay = true
+bus = &"External"
+attenuation_filter_db = -6.0
+
+[node name="wind noise" type="AudioStreamPlayer3D" parent="." unique_id=1276846552]
+stream = ExtResource("2_oij2n")
+attenuation_model = 1
+unit_size = 60.0
+autoplay = true
+bus = &"External"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="wind noise" unique_id=815342796]
+libraries/ = SubResource("AnimationLibrary_b8up1")
+speed_scale = 0.98614365
+
+[node name="rumble" type="AudioStreamPlayer3D" parent="." unique_id=48693462]
+stream = ExtResource("3_o0o1k")
+attenuation_model = 1
+volume_db = -18.0
+unit_size = 50.0
+max_db = 6.0
+pitch_scale = 0.19876629
+autoplay = true
+bus = &"External"
+
+[node name="rumble2" type="AudioStreamPlayer3D" parent="." unique_id=780179890]
+stream = ExtResource("3_o0o1k")
+attenuation_model = 2
+volume_db = 3.0
+unit_size = 5.0
+max_db = 6.0
+pitch_scale = 0.05
+autoplay = true
+max_distance = 25.0
+bus = &"External"
+
+[node name="wind 2" type="AudioStreamPlayer3D" parent="." unique_id=110834564]
+stream = ExtResource("4_b8up1")
+attenuation_model = 1
+volume_db = -12.0
+unit_size = 50.0
+pitch_scale = 0.96680135
+autoplay = true
+bus = &"External"
+attenuation_filter_db = -12.0
+
+[node name="blips" type="AudioStreamPlayer3D" parent="." unique_id=1300030473]
+stream = ExtResource("5_ypwfq")
+attenuation_model = 1
+volume_db = 15.0
+unit_size = 1.5
+pitch_scale = 0.26812488
+autoplay = true
+max_distance = 15.0
+bus = &"External"
+
+[node name="blips2" type="AudioStreamPlayer3D" parent="." unique_id=323333178]
+stream = ExtResource("5_ypwfq")
+attenuation_model = 1
+volume_db = 15.0
+unit_size = 1.5
+pitch_scale = 0.29814136
+autoplay = true
+max_distance = 15.0
+bus = &"External"
+
+[node name="wind hiss" type="AudioStreamPlayer3D" parent="." unique_id=1823442153]
+stream = ExtResource("6_pgems")
+attenuation_model = 1
+volume_db = -36.0
+unit_size = 20.0
+max_db = 6.0
+pitch_scale = 1.1332735
+autoplay = true
+max_distance = 50.0
+bus = &"External"
+attenuation_filter_db = -6.0

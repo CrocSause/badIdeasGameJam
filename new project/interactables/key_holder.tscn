@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c5lm540u5pgpn"]
-
-[ext_resource type="Script" uid="uid://b56qy3tgh8jkx" path="res://interactables/key_holder.gd" id="1_ndsa7"]
-
-[node name="KeyHolder" type="Node" unique_id=427082125]
-script = ExtResource("1_ndsa7")

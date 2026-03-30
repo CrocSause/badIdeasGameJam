@@ -1,5 +1,5 @@
 [gd_scene format=3 uid="uid://bo5gnjet2oxbb"]
 
-[node name="KeyPickup" type="Node3D" unique_id=1295249892]
+[node name="IntStatePickup" type="Node3D" unique_id=1295249892]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=377417606]

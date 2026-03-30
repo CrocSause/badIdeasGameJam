@@ -1,4 +1,4 @@
-[gd_resource type="ORMMaterial3D" load_steps=4 format=3 uid="uid://bmjgmchfvwf3k"]
+[gd_resource type="ORMMaterial3D" format=3 uid="uid://bmjgmchfvwf3k"]
 
 [ext_resource type="Texture2D" uid="uid://iowqymkein0o" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k_albedo.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://3u0oyohejglg" path="res://materials/flat concrete/concrete_01_yosoyfreeman_2k_orm.png" id="2"]

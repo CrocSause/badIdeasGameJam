@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbdwo742neaxs"
+path="res://.godot/imported/24 1 4 v4 edited ending boom.wav-a8bb6ba2b09e906cabe3b8c4923081ab.sample"
+
+[deps]
+
+source_file="res://sound/music/24 1 4 v4 edited ending boom.wav"
+dest_files=["res://.godot/imported/24 1 4 v4 edited ending boom.wav-a8bb6ba2b09e906cabe3b8c4923081ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
