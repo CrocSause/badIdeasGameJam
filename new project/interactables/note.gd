@@ -6,6 +6,8 @@ extends StaticBody3D
 @onready var sub_viewport: SubViewport = $SubViewport
 @onready var page: MeshInstance3D = $SubViewport/page
 @onready var rich_text_label: RichTextLabel = $SubViewport/MarginContainer/RichTextLabel
+@onready var margin_container: MarginContainer = $SubViewport/MarginContainer
+
 
 @export_group("Page")
 
@@ -59,18 +61,17 @@ func update_page_material(value):
 @export var text_margin: Vector4:
 	set(value):
 		text_margin = value
-		var margin: MarginContainer = $SubViewport/MarginContainer
-		if margin == null or not is_node_ready():
+		if margin_container == null or not is_node_ready():
 			await ready
-		if not $SubViewport/MarginContainer/RichTextLabel.is_finished():
-			await $SubViewport/MarginContainer/RichTextLabel.finished
+		if not rich_text_label.is_finished():
+			await rich_text_label.finished
 		if text_edit_delay != null and not text_edit_delay.is_stopped():
 			await text_edit_delay.timeout
-		if margin != null:
-			margin.add_theme_constant_override(&"margin_left"  , 10 * value.x)
-			margin.add_theme_constant_override(&"margin_top"   , 10 * value.y)
-			margin.add_theme_constant_override(&"margin_right" , 10 * value.z)
-			margin.add_theme_constant_override(&"margin_bottom", 10 * value.w)
+		if margin_container != null:
+			margin_container.add_theme_constant_override(&"margin_left"  , 10 * value.x)
+			margin_container.add_theme_constant_override(&"margin_top"   , 10 * value.y)
+			margin_container.add_theme_constant_override(&"margin_right" , 10 * value.z)
+			margin_container.add_theme_constant_override(&"margin_bottom", 10 * value.w)
 			if text_edit_delay != null:
 				text_edit_delay.start(0.25)
 
